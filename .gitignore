@@ -3,3 +3,6 @@ out
 target
 *.iml
 log
+/.project
+/.classpath
+/.settings
