@@ -1,4 +1,3 @@
-
 package ru.javaops.masterjava.xml.schema;
 
 import javax.xml.bind.JAXBElement;
@@ -24,7 +23,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _City_QNAME = new QName("http://javaops.ru", "City");
+    private static final QName _City_QNAME = new QName("http://javaops.ru", "City");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ru.javaops.masterjava.xml.schema
@@ -36,50 +35,94 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Payload }
      * 
+     * @return
+     *     the new instance of {@link Payload }
      */
     public Payload createPayload() {
         return new Payload();
     }
 
     /**
-     * Create an instance of {@link User }
-     * 
-     */
-    public User createUser() {
-        return new User();
-    }
-
-    /**
-     * Create an instance of {@link Payload.Cities }
-     * 
-     */
-    public Payload.Cities createPayloadCities() {
-        return new Payload.Cities();
-    }
-
-    /**
      * Create an instance of {@link Payload.Users }
      * 
+     * @return
+     *     the new instance of {@link Payload.Users }
      */
     public Payload.Users createPayloadUsers() {
         return new Payload.Users();
     }
 
     /**
+     * Create an instance of {@link Payload.Cities }
+     * 
+     * @return
+     *     the new instance of {@link Payload.Cities }
+     */
+    public Payload.Cities createPayloadCities() {
+        return new Payload.Cities();
+    }
+
+    /**
+     * Create an instance of {@link Payload.Projects }
+     * 
+     * @return
+     *     the new instance of {@link Payload.Projects }
+     */
+    public Payload.Projects createPayloadProjects() {
+        return new Payload.Projects();
+    }
+
+    /**
+     * Create an instance of {@link User }
+     * 
+     * @return
+     *     the new instance of {@link User }
+     */
+    public User createUser() {
+        return new User();
+    }
+
+    /**
+     * Create an instance of {@link GroupType }
+     * 
+     * @return
+     *     the new instance of {@link GroupType }
+     */
+    public GroupType createGroupType() {
+        return new GroupType();
+    }
+
+    /**
      * Create an instance of {@link CityType }
      * 
+     * @return
+     *     the new instance of {@link CityType }
      */
     public CityType createCityType() {
         return new CityType();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CityType }{@code >}}
+     * Create an instance of {@link Project }
      * 
+     * @return
+     *     the new instance of {@link Project }
+     */
+    public Project createProject() {
+        return new Project();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CityType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link CityType }{@code >}
      */
     @XmlElementDecl(namespace = "http://javaops.ru", name = "City")
     public JAXBElement<CityType> createCity(CityType value) {
-        return new JAXBElement<CityType>(_City_QNAME, CityType.class, null, value);
+        return new JAXBElement<>(_City_QNAME, CityType.class, null, value);
     }
 
 }

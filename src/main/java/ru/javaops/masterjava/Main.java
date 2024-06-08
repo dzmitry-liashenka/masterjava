@@ -1,5 +1,7 @@
 package ru.javaops.masterjava;
 
+import java.util.Arrays;
+
 /**
  * User: gkislin
  * Date: 05.08.2015
@@ -10,5 +12,11 @@ package ru.javaops.masterjava;
 public class Main {
     public static void main(String[] args) {
         System.out.format("Hello MasterJava!");
+        Arrays.stream(args).forEach(projectName -> {
+            System.out.println("Find Project with name " + projectName);
+
+
+
+        });
     }
 }

@@ -1,18 +1,24 @@
 <Payload xmlns="http://javaops.ru"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://javaops.ru payload.xsd">
+
     <Users>
-        <User flag="active" city="kiv">
-            <email>gmail@gmail.com</email>
-            <fullName>Full Name</fullName>
+        <User flag="active" city="kiv" email="gmail@gmail.com">
+            <fullName>Ralf Hirsch</fullName>
+            <group grp="basejava01"/>
+            <group grp="topjava02" />
+            <group grp="masterjava03" />
         </User>
-        <User flag="superuser" city="spb">
-            <email>admin@javaops.ru</email>
+        <User flag="superuser" city="spb" email="admin@javaops.ru">
             <fullName>Admin</fullName>
+            <group grp="masterjava03" />
+            <group grp="topjava03" />
+            <group grp="topjava02" />
         </User>
-        <User flag="deleted" city="spb">
-            <email>mail@yandex.ru</email>
-            <fullName>Deleted</fullName>
+        <User flag="deleted" city="spb" email="mail@yandex.ru">
+            <fullName>Sebastian Storch</fullName>
+            <group grp="basejava01"/>
+            <group grp="topjava02" />
         </User>
     </Users>
     <Cities>
@@ -20,4 +26,46 @@
         <City id="kiv">Киев</City>
         <City id="mnsk">Минск</City>
     </Cities>
+    <Projects>
+        <Project status="FINISHED" group="basejava01">
+            <name>BaseJava</name>
+            <description>Java-разработчик веб-приложений</description>
+        </Project>
+        <Project status="FINISHED" group="topjava01">
+            <name>TopJava</name>
+            <description>Enterprise Java-разработчик</description>
+        </Project>
+        <Project status="CURRENT" group="topjava02">
+            <name>TopJava</name>
+            <description>Enterprise Java-разработчик</description>
+        </Project>
+        <Project status="REGISTERING" group="topjava03">
+            <name>TopJava</name>
+            <description>Enterprise Java-разработчик</description>
+        </Project>
+        <Project status="FINISHED" group="masterjava01">
+            <name>MasterJava</name>
+            <description>Многомодульный Maven, многопоточность, JavaEE</description>
+        </Project>
+        <Project status="CURRENT" group="masterjava02">
+            <name>MasterJava</name>
+            <description>Многомодульный Maven, многопоточность, JavaEE</description>
+        </Project>
+        <Project status="REGISTERING" group="masterjava03">
+            <name>MasterJava</name>
+            <description>Многомодульный Maven, многопоточность, JavaEE</description>
+        </Project>
+    </Projects>
 </Payload>
+
+<!--
+1: Изменить XML схему:
+1.1 добавить проекты. Имеют название (например topjava, masterjava) и описание
+1.2 добавить группы. Они имеют название и тип (REGISTERING/CURRENT/FINISHED) и принадлежат проекту.
+ Например проект topjava, группы topjava01,topjava02, ..
+1.3 сделать User.email аттрибутом.
+1.4 реализовать принадлежность участников разным группам (Admin состоит в группах topjava07, topjava08, masterjava01)
+2: Дополнить xml тестовыми данными.
+3: Реализовать класс MainXml, которые принимает параметром имя проекта в тестовом xml
+и выводит отсортированный список его участников (использовать JAXB).
+-->

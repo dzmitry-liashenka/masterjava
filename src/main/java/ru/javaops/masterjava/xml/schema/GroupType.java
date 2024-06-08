@@ -3,24 +3,20 @@ package ru.javaops.masterjava.xml.schema;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java-Klasse für cityType complex type.</p>
+ * <p>Java-Klasse für groupType complex type.</p>
  * 
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.</p>
  * 
  * <pre>{@code
- * <complexType name="cityType">
+ * <complexType name="groupType">
  *   <simpleContent>
  *     <extension base="<http://www.w3.org/2001/XMLSchema>string">
- *       <attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}ID" />
+ *       <attribute name="grp" use="required" type="{http://javaops.ru}groupNameType" />
  *     </extension>
  *   </simpleContent>
  * </complexType>
@@ -29,18 +25,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "cityType", propOrder = {
+@XmlType(name = "groupType", namespace = "http://javaops.ru", propOrder = {
     "value"
 })
-public class CityType {
+public class GroupType {
 
     @XmlValue
     protected String value;
-    @XmlAttribute(name = "id", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlID
-    @XmlSchemaType(name = "ID")
-    protected String id;
+    @XmlAttribute(name = "grp", required = true)
+    protected GroupNameType grp;
 
     /**
      * Ruft den Wert der value-Eigenschaft ab.
@@ -67,27 +60,27 @@ public class CityType {
     }
 
     /**
-     * Ruft den Wert der id-Eigenschaft ab.
+     * Ruft den Wert der grp-Eigenschaft ab.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link GroupNameType }
      *     
      */
-    public String getId() {
-        return id;
+    public GroupNameType getGrp() {
+        return grp;
     }
 
     /**
-     * Legt den Wert der id-Eigenschaft fest.
+     * Legt den Wert der grp-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link GroupNameType }
      *     
      */
-    public void setId(String value) {
-        this.id = value;
+    public void setGrp(GroupNameType value) {
+        this.grp = value;
     }
 
 }

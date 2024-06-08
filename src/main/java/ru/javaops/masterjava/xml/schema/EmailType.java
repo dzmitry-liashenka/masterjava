@@ -8,33 +8,33 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * 
  * 
- * <p>Java-Klasse für flagType.</p>
+ * <p>Java-Klasse für emailType.</p>
  * 
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.</p>
  * <pre>{@code
- * <simpleType name="flagType">
+ * <simpleType name="emailType">
  *   <restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     <enumeration value="active"/>
- *     <enumeration value="deleted"/>
- *     <enumeration value="superuser"/>
+ *     <enumeration value="gmail@gmail.com"/>
+ *     <enumeration value="admin@javaops.ru"/>
+ *     <enumeration value="mail@yandex.ru"/>
  *   </restriction>
  * </simpleType>
  * }</pre>
  * 
  */
-@XmlType(name = "flagType", namespace = "http://javaops.ru")
+@XmlType(name = "emailType")
 @XmlEnum
-public enum FlagType {
+public enum EmailType {
 
-    @XmlEnumValue("active")
-    ACTIVE("active"),
-    @XmlEnumValue("deleted")
-    DELETED("deleted"),
-    @XmlEnumValue("superuser")
-    SUPERUSER("superuser");
+    @XmlEnumValue("gmail@gmail.com")
+    GMAIL_GMAIL_COM("gmail@gmail.com"),
+    @XmlEnumValue("admin@javaops.ru")
+    ADMIN_JAVAOPS_RU("admin@javaops.ru"),
+    @XmlEnumValue("mail@yandex.ru")
+    MAIL_YANDEX_RU("mail@yandex.ru");
     private final String value;
 
-    FlagType(String v) {
+    EmailType(String v) {
         value = v;
     }
 
@@ -58,8 +58,8 @@ public enum FlagType {
      * @throws IllegalArgumentException
      *     If no value matches in the enum declaration.
      */
-    public static FlagType fromValue(String v) {
-        for (FlagType c: FlagType.values()) {
+    public static EmailType fromValue(String v) {
+        for (EmailType c: EmailType.values()) {
             if (c.value.equals(v)) {
                 return c;
             }
