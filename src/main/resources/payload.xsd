@@ -101,7 +101,7 @@
     </xs:complexType>
 
 
-    <xs:element name="Project" > <!-- type="projectType" -->
+    <xs:element name="Project" >
         <xs:complexType>
             <xs:sequence>
                 <xs:element type="xs:string" name="name"/>

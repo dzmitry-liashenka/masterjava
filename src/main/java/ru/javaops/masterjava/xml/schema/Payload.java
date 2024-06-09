@@ -294,12 +294,12 @@ public class Payload {
      * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
+    @XmlType(name = "", namespace = "http://javaops.ru", propOrder = {
         "user"
     })
     public static class Users {
 
-        @XmlElement(name = "User")
+        @XmlElement(name = "User", namespace = "http://javaops.ru")
         protected List<User> user;
 
         /**

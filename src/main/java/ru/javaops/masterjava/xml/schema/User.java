@@ -46,6 +46,7 @@ public class User {
 
     @XmlElement(namespace = "http://javaops.ru", required = true)
     protected String fullName;
+    @XmlElement(namespace = "http://javaops.ru")
     protected List<GroupType> group;
     @XmlAttribute(name = "city", required = true)
     @XmlIDREF

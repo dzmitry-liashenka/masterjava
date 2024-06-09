@@ -5,20 +5,20 @@
     <Users>
         <User flag="active" city="kiv" email="gmail@gmail.com">
             <fullName>Ralf Hirsch</fullName>
-            <group grp="basejava_01"/>
-            <group grp="topjava_02" />
-            <group grp="masterjava_03" />
+            <group grp="basejava01"/>
+            <group grp="topjava02" />
+            <group grp="masterjava03" />
         </User>
         <User flag="superuser" city="spb" email="admin@javaops.ru">
             <fullName>Admin</fullName>
-            <group grp="masterjava_03" />
-            <group grp="topjava_03" />
-            <group grp="topjava_02" />
+            <group grp="masterjava03" />
+            <group grp="topjava03" />
+            <group grp="topjava02" />
         </User>
         <User flag="deleted" city="spb" email="mail@yandex.ru">
             <fullName>Sebastian Storch</fullName>
-            <group grp="basejava_01"/>
-            <group grp="topjava_02" />
+            <group grp="basejava01"/>
+            <group grp="topjava02" />
         </User>
     </Users>
     <Cities>
@@ -27,31 +27,31 @@
         <City id="mnsk">Минск</City>
     </Cities>
     <Projects>
-        <Project status="FINISHED" group="basejava_01">
+        <Project status="FINISHED" group="basejava01">
             <name>BaseJava</name>
             <description>Java-разработчик веб-приложений</description>
         </Project>
-        <Project status="FINISHED" group="topjava_01">
+        <Project status="FINISHED" group="topjava01">
             <name>TopJava</name>
             <description>Enterprise Java-разработчик</description>
         </Project>
-        <Project status="CURRENT" group="topjava_02">
+        <Project status="CURRENT" group="topjava02">
             <name>TopJava</name>
             <description>Enterprise Java-разработчик</description>
         </Project>
-        <Project status="REGISTERING" group="topjava_03">
+        <Project status="REGISTERING" group="topjava03">
             <name>TopJava</name>
             <description>Enterprise Java-разработчик</description>
         </Project>
-        <Project status="FINISHED" group="masterjava_01">
+        <Project status="FINISHED" group="masterjava01">
             <name>MasterJava</name>
             <description>Многомодульный Maven, многопоточность, JavaEE</description>
         </Project>
-        <Project status="CURRENT" group="masterjava_02">
+        <Project status="CURRENT" group="masterjava02">
             <name>MasterJava</name>
             <description>Многомодульный Maven, многопоточность, JavaEE</description>
         </Project>
-        <Project status="REGISTERING" group="masterjava_03">
+        <Project status="REGISTERING" group="masterjava03">
             <name>MasterJava</name>
             <description>Многомодульный Maven, многопоточность, JavaEE</description>
         </Project>
