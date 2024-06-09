@@ -35,12 +35,12 @@ import javax.xml.bind.annotation.XmlType;
     "name",
     "description"
 })
-@XmlRootElement(name = "Project")
+@XmlRootElement(name = "Project", namespace = "http://javaops.ru")
 public class Project {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://javaops.ru", required = true)
     protected String name;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://javaops.ru", required = true)
     protected String description;
     @XmlAttribute(name = "status", required = true)
     protected GroupStatusType status;

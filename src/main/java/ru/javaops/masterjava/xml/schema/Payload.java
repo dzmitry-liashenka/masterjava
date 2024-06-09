@@ -62,7 +62,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "", namespace = "http://javaops.ru", propOrder = {
 
 })
 @XmlRootElement(name = "Payload", namespace = "http://javaops.ru")
@@ -168,12 +168,12 @@ public class Payload {
      * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
+    @XmlType(name = "", namespace = "http://javaops.ru", propOrder = {
         "city"
     })
     public static class Cities {
 
-        @XmlElement(name = "City", required = true)
+        @XmlElement(name = "City", namespace = "http://javaops.ru", required = true)
         protected List<CityType> city;
 
         /**
@@ -231,12 +231,12 @@ public class Payload {
      * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
+    @XmlType(name = "", namespace = "http://javaops.ru", propOrder = {
         "project"
     })
     public static class Projects {
 
-        @XmlElement(name = "Project", required = true)
+        @XmlElement(name = "Project", namespace = "http://javaops.ru", required = true)
         protected List<Project> project;
 
         /**
