@@ -2,12 +2,14 @@ package ru.javaops.masterjava;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -18,18 +20,25 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
 
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.google.common.io.Resources;
 
 import ru.javaops.masterjava.stax.UserInfo;
+import ru.javaops.masterjava.xml.schema.EmailType;
+import ru.javaops.masterjava.xml.schema.FlagType;
 import ru.javaops.masterjava.xml.schema.ObjectFactory;
 import ru.javaops.masterjava.xml.schema.Payload;
 import ru.javaops.masterjava.xml.schema.User;
 import ru.javaops.masterjava.xml.util.JaxbParser;
 import ru.javaops.masterjava.xml.util.Schemas;
 import ru.javaops.masterjava.xml.util.StaxStreamProcessor;
+import ru.javaops.masterjava.xml.util.XPathProcessor;
 
 /**
  * User: gkislin
@@ -42,6 +51,12 @@ public class MainXml {
     private static final JaxbParser JAXB_PARSER = new JaxbParser(ObjectFactory.class);
 
     private static JAXBContext jaxbContext;
+    
+    private static Map<String, List<User>> resultMap = new HashMap<>();
+    
+    private static final String XPATH_PAYLOAD_USERS_USER_CHILD = "/*[name()='Payload']/*[name()='Users']/*[name()='User'][%d]";
+    private static final String XPATH_USERS = "/*[name()='Payload']/*[name()='Users']/*";
+    private static final String XPATH_USER_FULLNAME = "/*[name()='Payload']/*[name()='Users']/*[name()='User']/*[name()='fullName']/text()";
 
 	public static void main(String[] args) {
 		System.out.println("HW02 Start...");
@@ -52,7 +67,19 @@ public class MainXml {
 				
 				// findUsersWithJAXB(projectName);
 
-				findUsersAndEmailsWithStAX(projectName);
+//				findUsersAndEmailsWithStAX(projectName);
+
+				findUserWithXPath(projectName);
+				
+				resultMap.forEach((p,u)-> {
+					System.out.println("--------------------------------------");
+					System.out.println("ProjectName: " + p );
+				
+					u.stream().parallel().collect(Collectors.toList()).forEach(v -> {
+						System.out.println(v.getFullName() + " - " + v.getCity() + " - " +  v.getFlag().value() + " - " + v.getEmail().value());
+					});
+					System.out.println("--------------------------------------");
+				});
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -61,9 +88,66 @@ public class MainXml {
 		});
 	}
     
-    /**
+	/**
+     * Sucht Benutzer mit XPath, die in Project mit ProjectName teilnehmen.
+     * Gibt die Namen und Email in Console für diese Project aus.
+     * @param projectName Name des Projectes.
+	 * @throws IOException Wenn ein Fehler auftritt
+     */
+    private static void findUserWithXPath(String projectName) throws IOException {
+		try (InputStream is = Resources.getResource("payload.xml").openStream()) {
+
+			resultMap.put(projectName, new ArrayList<>());
+			
+			XPathProcessor processor = new XPathProcessor(is);
+			
+			XPathExpression usersExpression = XPathProcessor.getExpression(XPATH_USERS);
+			NodeList usersList = processor.evaluate(usersExpression, XPathConstants.NODESET);
+			
+			XPathExpression expressionFullname = XPathProcessor.getExpression(XPATH_USER_FULLNAME);
+			NodeList fullNameList = processor.evaluate(expressionFullname, XPathConstants.NODESET);
+
+			for (int i = 0; i < usersList.getLength(); i++) {
+				
+				String city = "";
+				FlagType flagType = null;
+				EmailType emailType = null;
+				
+				XPathExpression user1Expression = XPathProcessor.getExpression(String.format(XPATH_PAYLOAD_USERS_USER_CHILD, i+1));
+				Node userNode = (Node)processor.evaluate(user1Expression, XPathConstants.NODE);
+				
+				for (int k = 0; k < userNode.getAttributes().getLength(); k++) {
+					if (userNode.getAttributes().item(k).getNodeName().equalsIgnoreCase("flag")) {
+						String flag = userNode.getAttributes().item(k).getTextContent();
+						flagType = FlagType.fromValue(flag);
+					}
+					if (userNode.getAttributes().item(k).getNodeName().equalsIgnoreCase("city")) {
+						city = userNode.getAttributes().item(k).getTextContent();
+						
+					}
+					if (userNode.getAttributes().item(k).getNodeName().equalsIgnoreCase("email")) {
+						String email = userNode.getAttributes().item(k).getTextContent();
+						emailType = EmailType.fromValue(email);
+					}
+				}
+				 
+				User user = new User();
+				user.setFullName(fullNameList.item(i).getTextContent());
+				user.setCity(city);
+				user.setFlag(flagType);
+				user.setEmail(emailType);
+				resultMap.get(projectName).add(user);
+			}
+
+		} catch (IOException e) {
+			throw e;
+		}
+		
+	}
+
+	/**
      * Sucht Benutzer und E-Mail mit StAX, die in Project mit ProjectName teilnehmen.
-     * Gibt die Namen in Console für diese Project aus.
+     * Gibt die Namen und EMail in Console für diese Project aus.
      * @param projectName Name des Projectes.
      */
     private static void findUsersAndEmailsWithStAX(String projectName) {
